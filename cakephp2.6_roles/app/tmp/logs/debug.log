@@ -1,0 +1,17 @@
+2015-01-22 21:39:50 Debug: Notice (8): Undefined index: id in [C:\wamp\www\cake2.6_roles\app\Model\User.php, line 107]
+Trace:
+User::isUniqueUsername() - APP\Model\User.php, line 107
+CakeValidationRule::process() - CORE\Cake\Model\Validator\CakeValidationRule.php, line 275
+CakeValidationSet::validate() - CORE\Cake\Model\Validator\CakeValidationSet.php, line 135
+ModelValidator::errors() - CORE\Cake\Model\ModelValidator.php, line 268
+ModelValidator::validates() - CORE\Cake\Model\ModelValidator.php, line 99
+Model::validates() - CORE\Cake\Model\Model.php, line 3456
+Model::_doSave() - CORE\Cake\Model\Model.php, line 1825
+Model::save() - CORE\Cake\Model\Model.php, line 1747
+UsersController::add() - APP\Controller\UsersController.php, line 74
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE\Cake\Controller\Controller.php, line 490
+Dispatcher::_invoke() - CORE\Cake\Routing\Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE\Cake\Routing\Dispatcher.php, line 167
+[main] - APP\webroot\index.php, line 111
+
