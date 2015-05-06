@@ -1,0 +1,91 @@
+/* Ponemos los textos alineados en toda la página */
+body{
+text-align:center;
+}
+
+/* Usamos la fuente personal cargada a través de Google Fonts */
+h2, p{
+font-family: 'Yanone Kaffeesatz', 'sans-serif';
+}
+
+/* Cabecera */
+.header{
+margin-bottom:25px;
+}
+
+#cabecera{
+display: block;
+margin: auto;
+}
+
+/* Contenedor de elementos para votar */
+
+#containerElementos{
+width:50%;
+height: 400px;
+background-color:#F2F2F2;
+-webkit-box-shadow: 0 2px 0 #5C9CCC, 0px 4px 4px rgba(0,0,0,0.4), inset 0px 2px 5px rgba(0,0,0,0.2);
+-moz-box-shadow: 0 2px 0 #5C9CCC, 0px 4px 4px rgba(0,0,0,0.4), inset 0px 2px 5px rgba(0,0,0,0.2);
+box-shadow: 0 2px 0 #5C9CCC, 0px 4px 4px rgba(0,0,0,0.4), inset 0px 2px 5px rgba(0,0,0,0.2);
+-webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+float:right;
+margin-top: 5px;
+overflow:auto;
+}
+
+/* Contenedor de elecciones para votar */
+#containerVotacion{
+width:33%;
+float:left;
+}
+
+/* Cada una de las elecciones para votar con sus colores de fondo*/
+.destino{
+width:100%;
+height:125px;
+margin: 5px 10px 5px 10px;
+-webkit-box-shadow: 0 2px 0 #5C9CCC, 0px 4px 4px rgba(0,0,0,0.4), inset 0px 2px 5px rgba(0,0,0,0.2);
+-moz-box-shadow: 0 2px 0 #5C9CCC, 0px 4px 4px rgba(0,0,0,0.4), inset 0px 2px 5px rgba(0,0,0,0.2);
+box-shadow: 0 2px 0 #5C9CCC, 0px 4px 4px rgba(0,0,0,0.4), inset 0px 2px 5px rgba(0,0,0,0.2); 
+display: inline-block;
+-webkit-border-radius: 15px;
+-moz-border-radius: 15px;
+border-radius: 15px;
+overflow:auto;
+}
+
+.verde{
+background-color: #CEF6CE;
+}
+.amarillo{
+background-color: #F5F6CE;
+}
+.rojo{
+background-color: #F78181;
+}
+
+/* Pie de página y botón de resultados */
+#pie{
+clear:both;
+}
+
+#resultados {
+padding: 5px 5px 5px 45px;
+border: 1px solid #5C9CCC;
+color: #5C9CCC;
+text-decoration: none;
+background: #dcdcdc url(../img/iconAzul.png) no-repeat scroll 5px center;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-box-shadow: 0 2px 0 #5C9CCC, 0px 4px 4px rgba(0,0,0,0.4), inset 0px 2px 5px rgba(0,0,0,0.2);
+-moz-box-shadow: 0 2px 0 #5C9CCC, 0px 4px 4px rgba(0,0,0,0.4), inset 0px 2px 5px rgba(0,0,0,0.2);
+box-shadow: 0 2px 0 #5C9CCC, 0px 4px 4px rgba(0,0,0,0.4), inset 0px 2px 5px rgba(0,0,0,0.2);
+}
+
+#resultados:hover{
+cursor: pointer;
+background: #dcdcdc url(../img/iconVerde.png) no-repeat scroll 5px center;
+}

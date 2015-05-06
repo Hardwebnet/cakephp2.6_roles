@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8"/>
+	<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,300,200,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css"/>
+	<script>
+	
+		var destino;
+		var arrastrando;
+		var ancho;
+		var alto;
+		var resultado=new Array();
+		var resultadoFinal=new Array();
+		
+		function allowDrop(ev)
+		{	
+			ev.preventDefault();
+			destino = devuelveElemento(ev);
+			destino.style.opacity="0.4";
+		}
+
+		function drag(ev)
+		{
+			arrastrando = devuelveElemento(ev);
+			ancho = arrastrando.width;
+			alto = arrastrando.height;
+			arrastrando.style.width=ancho/2+"px";
+			arrastrando.style.height=alto/2+"px";
+			var dragIcon = document.createElement('img');
+			dragIcon.src = 'img/vote.png';
+			dragIcon.width = 100;
+			ev.dataTransfer.setDragImage(dragIcon, -10, -10);
+			ev.dataTransfer.setData("Text", ev.target.id);
+		}
+		
+		function dragLeave(ev){
+			destino.style.opacity="1";
+		}
+		
+		function dragEnd(ev){
+			arrastrando.style.width=ancho+"px";
+			arrastrando.style.height=alto+"px";
+		}
+
+		function drop(ev)
+		{	
+			var contenedorUsado = destino.id;
+			var elementoVotado = arrastrando.id;
+			resultados(contenedorUsado,elementoVotado);			
+			ev.preventDefault();
+			destino.style.opacity="1";
+			var data = ev.dataTransfer.getData("Text");
+			ev.target.appendChild(document.getElementById(data));
+		}
+		
+		function devuelveElemento(ev){
+			var elemento = document.getElementById(ev.target.id);
+			return elemento;
+		}
+		
+		function resultados(voto,votado){
+			resultado.push(voto+" "+votado);
+		}
+		
+		function obtenerResultados(){
+
+			resultadoFinal = sanearResultados();			
+					
+			var ancho= 700;
+			var alto = 500;
+			var posicion_x; 
+			var posicion_y; 
+			posicion_x=(screen.width/2)-(ancho/2); 
+			posicion_y=(screen.height/2)-(alto/2);			
+			MiVentana = window.open("","Resultados Drag&Drop HTML5","toolbar=no, location=no, status=no, resizable=no, top="+ posicion_y +", left="+ posicion_x +", width=700, height=500");
+			MiVentana.document.write('<!DOCTYPE html>\n<head>\n<title>Resultados Drag&Drop HTML5</title>');
+			MiVentana.document.write('\n<meta charset="utf-8"/>');
+			MiVentana.document.write('\n<link href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,300,200,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
+			MiVentana.document.write('\n<link rel="stylesheet" type="text/css" href="css/estilo.css"/>');
+			MiVentana.document.write('\n</head>\n<body>\n<div id="header">');
+			MiVentana.document.write('\n<img id="cabecera" src="img/cabecera.png" />');
+			MiVentana.document.write('\n<h2>Resultados</h2>\n');
+			for (var z=0;z<resultadoFinal.length;z++){
+				MiVentana.document.write(resultadoFinal[z]+"<br>\n");
+			}
+			MiVentana.document.write('<br>');
+			MiVentana.document.write('\n<input type="button" value="Cerrar" onclick="window.close()">');
+			MiVentana.document.write('\n</div>\n</body>\n</html>');
+			MiVentana.document.close();
+		}
+		
+		function sanearResultados(){
+		
+			var social = [];
+			var controlFacebook=0;
+			var controlTwitter=0;
+			var controlLinkedin=0;
+
+			for (var j=1;j<=resultado.length;j++){
+				
+				var elemento = resultado[resultado.length-j].toString();
+				
+				if (elemento.indexOf("Elementos")>0){					
+					continue;
+				}
+				
+				if (elemento.indexOf("facebook")>0 && controlFacebook==0){
+					social.push(elemento);
+					controlFacebook = 1;
+				}
+				if (elemento.indexOf("twitter")>0 && controlTwitter==0){
+					social.push(elemento);
+					controlTwitter = 1;
+				}
+				if (elemento.indexOf("linkedin")>0 && controlLinkedin==0){
+					social.push(elemento);
+					controlLinkedin = 1;
+				}
+
+			}
+			
+			return social;
+		}
+
+		
+	</script>
+	</head>
+	<body>
+		
+		<div id="header">
+			<img id="cabecera" src="img/cabecera.png" />
+			<h2>Vota tus aplicaciones favoritas</h2>
+		</div>
+		
+		<hr>
+		
+		<div id="containerVotacion">
+			
+				<div id="Muy_buena" class="destino verde" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+					<p>Muy buena</p>
+				</div>
+				
+				<div id="Buena" class="destino amarillo" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+					<p>Buena</p>
+				</div>
+				
+				<div id="Regular" class="destino rojo" ondrop="drop(event)" ondragover="allowDrop(event)"	ondragleave="dragLeave(event)">
+					<p>Regular</p>
+				</div>
+			
+		</div>
+		
+		<div id="containerElementos" ondrop="drop(event)" ondragover="allowDrop(event)"	ondragleave="dragLeave(event)">
+			
+				<img id="facebook" src="img/facebook.png" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" width="64" height="64"/>
+				
+				<img id="twitter" src="img/twitter.png" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" width="64" height="64"/>
+				
+				<img id="linkedin" src="img/linkedin.png" draggable="true"	ondragstart="drag(event)" ondragend="dragEnd(event)" width="64" height="64"/>
+			
+		</div>
+		
+		<footer id="pie">
+			<button id="resultados" onclick="obtenerResultados();">Ver resultados</button>
+		</footer>
+		
+	</body>
+</html>
